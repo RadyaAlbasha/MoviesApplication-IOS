@@ -62,6 +62,9 @@ class FavoriteViewController: UICollectionViewController {
 
     // MARK: UICollectionViewDelegate
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let str = segue.destination.restorationIdentifier
+    }
     /*
     // Uncomment this method to specify if the specified item should be highlighted during tracking
     override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
