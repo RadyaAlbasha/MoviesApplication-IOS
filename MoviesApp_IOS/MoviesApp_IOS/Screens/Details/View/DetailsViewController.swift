@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class DetailsViewController: UIViewController {
 
     @IBOutlet weak var posterImage: UIImageView!
     

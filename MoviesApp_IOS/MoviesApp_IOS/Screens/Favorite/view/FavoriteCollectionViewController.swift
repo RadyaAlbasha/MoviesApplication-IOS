@@ -1,5 +1,5 @@
 //
-//  HomeViewController.swift
+//  FavoriteViewController.swift
 //  MoviesApp_IOS
 //
 //  Created by Esraa Hassan on 5/13/19.
@@ -7,13 +7,20 @@
 //
 
 import UIKit
+import CoreData
+import SDWebImage
+private let reuseIdentifier = "FavoriteCell"
 
-private let reuseIdentifier = "HomeCell"
+class FavoriteCollectionViewController: UICollectionViewController {
 
-class HomeViewController: UICollectionViewController {
-
+    var moviesArr : Array<NSManagedObject>?
+    var favoritePresenter: FavoritePresenter = FavoritePresenter()
+    var imageLink : String = "http://image.tmdb.org/t/p/w185/"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.favoritePresenter.setDelegate(delegate: self)
+        moviesArr = Array<NSManagedObject>()
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -24,6 +31,14 @@ class HomeViewController: UICollectionViewController {
         // Do any additional setup after loading the view.
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        //bgeb ely 3amlalo save kolo
+        let appDeleget = UIApplication.shared.delegate as! AppDelegate
+        self.favoritePresenter.fetchMoviesFromCoreData(appDeleget: appDeleget, moviesArr: &self.moviesArr!)
+        
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -49,19 +64,31 @@ class HomeViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return 1
+        return moviesArr!.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
-    
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! FavoriteCollectionViewCell
+        let image : String = moviesArr![indexPath.row].value(forKey: "poster_path") as! String
+        let finalImageLink = self.imageLink + image
         // Configure the cell
-        
+        cell.imageViewPoster.sd_setImage(with: URL(string: finalImageLink), placeholderImage: UIImage(named: "placeholder.png"))
+
+    
         return cell
     }
 
     // MARK: UICollectionViewDelegate
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = (self.view.frame.size.width - 1 * 2)/2 //some width
+        let height = width * 275 / 185 // retio
+        return CGSize(width: width, height: height)
+    }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let str = segue.destination.restorationIdentifier
+    }
     /*
     // Uncomment this method to specify if the specified item should be highlighted during tracking
     override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
