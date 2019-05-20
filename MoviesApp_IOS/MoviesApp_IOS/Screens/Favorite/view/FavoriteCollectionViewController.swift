@@ -14,7 +14,7 @@ private let reuseIdentifier = "FavoriteCell"
 class FavoriteCollectionViewController: UICollectionViewController {
 
     var moviesArr : Array<HomeMovie>?
-    var favoritePresenter: FavoritePresenter = FavoritePresenter()
+    var favoritePresenter: FavoritePresenter?
     var imageLink : String = "http://image.tmdb.org/t/p/w185/"
     
     override func viewDidLoad() {
@@ -43,15 +43,17 @@ class FavoriteCollectionViewController: UICollectionViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using [segue destinationViewController].
+        let detailsDelegate = segue.destination as! DetailsDelegate
         // Pass the selected object to the new view controller.
+        detailsDelegate.setMovieToDisplayDetails(movie: moviesArr![(self.collectionView?.indexPath(for: sender as! UICollectionViewCell)?.row)!])
     }
-    */
+    
 
     // MARK: UICollectionViewDataSource
 
@@ -83,9 +85,7 @@ class FavoriteCollectionViewController: UICollectionViewController {
         return CGSize(width: width, height: height)
     }
 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let str = segue.destination.restorationIdentifier
-    }
+ 
     /*
     // Uncomment this method to specify if the specified item should be highlighted during tracking
     override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {

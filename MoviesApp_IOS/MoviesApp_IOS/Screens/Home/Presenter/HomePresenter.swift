@@ -36,7 +36,7 @@ class HomePresenter : HomePresenterDelegate {
     func setJSON(json : JSON) {
         self.json = json
     }
-    func setMoviesArr(moviesArr : Array<HomeMovies>){
+    func setMoviesArr(moviesArr : Array<HomeMovie>){
         self.moviesArr = moviesArr
         self.homeDelegate?.setMoviesArr(moviesArr: moviesArr)
     }

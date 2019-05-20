@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SDWebImage
 
 class DetailsViewController: UIViewController , UITableViewDataSource , UITableViewDelegate , DetailsDelegate{
     var movie : HomeMovie? = nil;
@@ -36,7 +35,7 @@ class DetailsViewController: UIViewController , UITableViewDataSource , UITableV
         posterImage.sd_setImage(with: URL(string: tempStrUrl), placeholderImage: UIImage(named: "placeholder.png"))
         movieTitleLabel.text = movie?.original_title
         releaseDateLabel.text=movie?.release_date
-        voteAverage.text="\((movie?.vote_Average)!)"
+        voteAverage.text="\((movie?.vote_Average)!) "
         overviewTextArea.text = movie?.overview
     }
 
