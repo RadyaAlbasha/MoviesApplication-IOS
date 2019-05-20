@@ -13,13 +13,13 @@ import SDWebImage
 class HomeCollectionViewController: UICollectionViewController ,UICollectionViewDelegateFlowLayout{
 
     private let reuseIdentifier = "HomeCell"
-    var moviesArr : Array<HomeMovies>?
+    var moviesArr : Array<HomeMovie>?
     var homePresenter: HomePresenter = HomePresenter()
     var imageLink : String = "http://image.tmdb.org/t/p/w185/"
     override func viewDidLoad() {
         super.viewDidLoad()
         self.homePresenter.setDelegate(delegate: self)
-        moviesArr = Array<HomeMovies>()
+        moviesArr = Array<HomeMovie>()
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -43,15 +43,18 @@ class HomeCollectionViewController: UICollectionViewController ,UICollectionView
         // Dispose of any resources that can be recreated.
     }
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using [segue destinationViewController].
+        let detailsDelegate = segue.destination as! DetailsDelegate
         // Pass the selected object to the new view controller.
+        //        detailsDelegate.setMovieToDisplayDetails(movie: moviesArr![(self.collectionView?.indexPathsForSelectedItems![0].row)!])
+        detailsDelegate.setMovieToDisplayDetails(movie: moviesArr![(self.collectionView?.indexPath(for: sender as! UICollectionViewCell)?.row)!])
     }
-    */
+ 
 
     // MARK: UICollectionViewDataSource
 

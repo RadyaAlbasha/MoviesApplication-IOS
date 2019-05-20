@@ -13,35 +13,17 @@ import SwiftyJSON
 
 class FavoritePresenter{
     var favoriteDelegate: FavoriteDelegate?
-    var network : MyNetwork?
-    //var AccessData: AccessCoreData?
-    var json : JSON?
+    //    var network : MyNetwork?
+    var accessData: AccessData = AccessData();
     
-    init() {
-        // here we can send the NW Services
-    //    self.network = MyNetwork()
-        //self.AccessData = AccessCoreData()
-        self.network?.fetchMoviesData()
-        /*json = self.network?.getJSON()
-         if(json != nil){
-         AccessData?.saveJSON(jsonData: json!)
-         }*/
-        
-    }
-    func setDelegate(delegate: FavoriteDelegate){
-        self.favoriteDelegate = delegate
-        
-    }
-    
-    func fetchMoviesFromCoreData(appDeleget: AppDelegate , moviesArr : inout Array<NSManagedObject>)
+    func setDelegate(delegate: FavoriteDelegate)
     {
-        let manegerContext = appDeleget.persistentContainer.viewContext
-        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Movie")
-        do{
-            moviesArr = try manegerContext.fetch(fetchRequest)
-        }catch let error as NSError{
-            print(error.localizedDescription)
-        }
+        self.favoriteDelegate = delegate
+    }
+    
+    func fetchMoviesFromCoreData() -> Array<HomeMovie>
+    {
+        return accessData.retriveMovies()!;
     }
   
     

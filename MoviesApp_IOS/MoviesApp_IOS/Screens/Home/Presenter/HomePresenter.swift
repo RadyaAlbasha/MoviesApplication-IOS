@@ -16,13 +16,13 @@ class HomePresenter : HomePresenterDelegate {
     var network : MyNetwork?
     //var AccessData: AccessCoreData?
     var json : JSON?
-    var moviesArr : Array<HomeMovies>?
+    var moviesArr : Array<HomeMovie>?
     init() {
         // here we can send the NW Services
         self.network = MyNetwork(presenterDelegete: self)
         //self.AccessData = AccessCoreData()
         self.network?.fetchMoviesData()
-        self.moviesArr = Array<HomeMovies>()
+        self.moviesArr = Array<HomeMovie>()
         /*json = self.network?.getJSON()
         if(json != nil){
             AccessData?.saveJSON(jsonData: json!)

@@ -9,7 +9,10 @@
 import UIKit
 import SDWebImage
 
-class DetailsViewController: UIViewController , UITableViewDataSource , UITableViewDelegate {
+class DetailsViewController: UIViewController , UITableViewDataSource , UITableViewDelegate , DetailsDelegate{
+    var movie : HomeMovie? = nil;
+    
+    var detailsPresenter : DetailsPresenter? = nil
 
     @IBOutlet weak var posterImage: UIImageView!
     
@@ -21,9 +24,20 @@ class DetailsViewController: UIViewController , UITableViewDataSource , UITableV
     
     @IBOutlet weak var overviewTextArea: UITextView!
     
+    let imageLink : String = "http://image.tmdb.org/t/p/w185/"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        detailsPresenter = DetailsPresenter(detailsViewDelegate: self)
+        var tempStrUrl: String = (movie?.poster_path)!
+        tempStrUrl = imageLink + tempStrUrl
+        print(tempStrUrl)
+        posterImage.sd_setImage(with: URL(string: tempStrUrl), placeholderImage: UIImage(named: "placeholder.png"))
+        movieTitleLabel.text = movie?.original_title
+        releaseDateLabel.text=movie?.release_date
+        voteAverage.text="\((movie?.vote_Average)!)"
+        overviewTextArea.text = movie?.overview
     }
 
     override func didReceiveMemoryWarning() {
@@ -32,6 +46,11 @@ class DetailsViewController: UIViewController , UITableViewDataSource , UITableV
     }
     
     @IBAction func addToFavoriteBtn(_ sender: UIButton) {
+        detailsPresenter?.saveMovieToFavorit(movie: movie!)
+    }
+    
+    func setMovieToDisplayDetails(movie: HomeMovie) {
+        self.movie = movie;
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {

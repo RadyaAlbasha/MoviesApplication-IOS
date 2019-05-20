@@ -13,15 +13,13 @@ private let reuseIdentifier = "FavoriteCell"
 
 class FavoriteCollectionViewController: UICollectionViewController {
 
-    var moviesArr : Array<NSManagedObject>?
+    var moviesArr : Array<HomeMovie>?
     var favoritePresenter: FavoritePresenter = FavoritePresenter()
     var imageLink : String = "http://image.tmdb.org/t/p/w185/"
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.favoritePresenter.setDelegate(delegate: self)
-        moviesArr = Array<NSManagedObject>()
-
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -34,8 +32,9 @@ class FavoriteCollectionViewController: UICollectionViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         //bgeb ely 3amlalo save kolo
-        let appDeleget = UIApplication.shared.delegate as! AppDelegate
-        self.favoritePresenter.fetchMoviesFromCoreData(appDeleget: appDeleget, moviesArr: &self.moviesArr!)
+        self.favoritePresenter = FavoritePresenter()
+        self.moviesArr = self.favoritePresenter!.fetchMoviesFromCoreData()
+        self.favoritePresenter!.setDelegate(delegate: self)
         
     }
     
@@ -69,12 +68,10 @@ class FavoriteCollectionViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! FavoriteCollectionViewCell
-        let image : String = moviesArr![indexPath.row].value(forKey: "poster_path") as! String
+        let image : String = moviesArr![indexPath.row].poster_path
         let finalImageLink = self.imageLink + image
         // Configure the cell
         cell.imageViewPoster.sd_setImage(with: URL(string: finalImageLink), placeholderImage: UIImage(named: "placeholder.png"))
-
-    
         return cell
     }
 

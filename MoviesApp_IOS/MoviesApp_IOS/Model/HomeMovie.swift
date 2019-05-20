@@ -7,7 +7,7 @@
 //
 
 import Foundation
-class HomeMovies{
+class HomeMovie{
     var original_title : String
     var overview : String
     var poster_path : String

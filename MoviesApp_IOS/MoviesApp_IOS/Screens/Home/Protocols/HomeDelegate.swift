@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 protocol HomeDelegate {
-    func setMoviesArr(moviesArr : Array<HomeMovies>)
+    func setMoviesArr(moviesArr : Array<HomeMovie>)
     //func showMovieDetails(segueDestination : String)
    // func showMovieDetails()
     // func downloadImage(imageView : UIImageView)

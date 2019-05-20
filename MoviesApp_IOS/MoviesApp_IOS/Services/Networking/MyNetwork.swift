@@ -27,17 +27,25 @@ class MyNetwork{
                 case .success(let value):
                     self.json = JSON(value)
                     self.homePresenter?.setJSON(json: self.json!)
-                    self.homePresenter?.setMoviesArr(moviesArr: (self.accessData?.saveJSON(jsonData: self.json!))!)
+                    self.homePresenter?.setMoviesArr(moviesArr: (self.saveJSON(jsonData: self.json!)))
                     
                     //self.homePresenter.getJSON(json: json)
-                    print (self.json!)
+//                    print (self.json!)
                 case .failure(let error):
                     print(error.localizedDescription)
                 }
             })
         }
     }
-    
+    func saveJSON(jsonData : JSON) -> Array<HomeMovie> {
+        let results = jsonData["results"]
+        var moviesArr = Array<HomeMovie> ()
+        results.array?.forEach({ (newMovie) in
+            let movie = HomeMovie(original_title: newMovie["original_title"].stringValue , poster_path: newMovie["poster_path"].stringValue , overview: newMovie["overview"].stringValue, release_date: newMovie["release_date"].stringValue , vote_Average: newMovie["vote_Average"].floatValue)
+            moviesArr.append(movie)
+        })
+        return moviesArr
+    }
     
    
     
