@@ -10,6 +10,8 @@
 		447986E82292E1BB00B87375 /* AccessData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447986E72292E1BB00B87375 /* AccessData.swift */; };
 		447986EA2292E1D700B87375 /* MyNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447986E92292E1D700B87375 /* MyNetwork.swift */; };
 		447986EC2292E22100B87375 /* HomeMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447986EB2292E22100B87375 /* HomeMovie.swift */; };
+		447986F22292E90E00B87375 /* DetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447986F12292E90E00B87375 /* DetailsPresenter.swift */; };
+		447986F52292E93C00B87375 /* DetailsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447986F42292E93B00B87375 /* DetailsDelegate.swift */; };
 		9E9AF268228C561600749A5B /* 2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9E9AF267228C561600749A5B /* 2.jpg */; };
 		BA04F8F122914389009A4EAB /* HomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA04F8F022914389009A4EAB /* HomeCollectionViewCell.swift */; };
 		BA04F8FE22914E8C009A4EAB /* FavoriteDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA04F8FD22914E8C009A4EAB /* FavoriteDelegate.swift */; };
@@ -38,6 +40,8 @@
 		447986E72292E1BB00B87375 /* AccessData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccessData.swift; sourceTree = "<group>"; };
 		447986E92292E1D700B87375 /* MyNetwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyNetwork.swift; sourceTree = "<group>"; };
 		447986EB2292E22100B87375 /* HomeMovie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeMovie.swift; sourceTree = "<group>"; };
+		447986F12292E90E00B87375 /* DetailsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsPresenter.swift; sourceTree = "<group>"; };
+		447986F42292E93B00B87375 /* DetailsDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsDelegate.swift; sourceTree = "<group>"; };
 		9E9AF267228C561600749A5B /* 2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 2.jpg; sourceTree = "<group>"; };
 		BA04F8F022914389009A4EAB /* HomeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewCell.swift; sourceTree = "<group>"; };
 		BA04F8FD22914E8C009A4EAB /* FavoriteDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteDelegate.swift; sourceTree = "<group>"; };
@@ -75,6 +79,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		447986F32292E91800B87375 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				447986F12292E90E00B87375 /* DetailsPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		447986F62292E94600B87375 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				447986F42292E93B00B87375 /* DetailsDelegate.swift */,
+			);
+			name = Protocols;
+			path = "New Group";
+			sourceTree = "<group>";
+		};
 		BA04F8F222914996009A4EAB /* Favorite */ = {
 			isa = PBXGroup;
 			children = (
@@ -122,6 +143,8 @@
 		BA04F905229151A2009A4EAB /* Details */ = {
 			isa = PBXGroup;
 			children = (
+				447986F62292E94600B87375 /* Protocols */,
+				447986F32292E91800B87375 /* Presenter */,
 				BA04F906229151B2009A4EAB /* View */,
 			);
 			path = Details;
@@ -385,10 +408,12 @@
 				BA857DF2228990E90031AA0B /* AppDelegate.swift in Sources */,
 				BA5154C02290433400420DC1 /* HomeCollectionViewController_ExtensionDelegate.swift in Sources */,
 				BA04F90422914FF1009A4EAB /* FavoriteCollectionViewCell.swift in Sources */,
+				447986F52292E93C00B87375 /* DetailsDelegate.swift in Sources */,
 				447986EC2292E22100B87375 /* HomeMovie.swift in Sources */,
 				BA04F908229167F2009A4EAB /* HomePresenterDelegete.swift in Sources */,
 				447986E82292E1BB00B87375 /* AccessData.swift in Sources */,
 				BA04F90222914F98009A4EAB /* FavoriteCollectionViewController_ExtensionDelegate.swift in Sources */,
+				447986F22292E90E00B87375 /* DetailsPresenter.swift in Sources */,
 				BA04F90022914EC7009A4EAB /* FavoritePresenter.swift in Sources */,
 				BA857DFA228990E90031AA0B /* MoviesApp_IOS.xcdatamodeld in Sources */,
 				BA5154BC2290401400420DC1 /* HomePresenter.swift in Sources */,
