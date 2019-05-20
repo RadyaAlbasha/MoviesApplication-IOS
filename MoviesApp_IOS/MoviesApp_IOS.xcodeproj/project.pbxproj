@@ -23,6 +23,7 @@
 		BA5154C02290433400420DC1 /* HomeCollectionViewController_ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5154BF2290433400420DC1 /* HomeCollectionViewController_ExtensionDelegate.swift */; };
 		BA5154C2229081AE00420DC1 /* MyNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5154C1229081AE00420DC1 /* MyNetwork.swift */; };
 		BA5154C52290848900420DC1 /* AccessData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5154C42290848900420DC1 /* AccessData.swift */; };
+		BA537BE322928FDF00660B94 /* MyLaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA537BE222928FDF00660B94 /* MyLaunchViewController.swift */; };
 		BA857DF2228990E90031AA0B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA857DF1228990E90031AA0B /* AppDelegate.swift */; };
 		BA857DF4228990E90031AA0B /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA857DF3228990E90031AA0B /* DetailsViewController.swift */; };
 		BA857DFA228990E90031AA0B /* MoviesApp_IOS.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BA857DF8228990E90031AA0B /* MoviesApp_IOS.xcdatamodeld */; };
@@ -54,6 +55,7 @@
 		BA5154BF2290433400420DC1 /* HomeCollectionViewController_ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewController_ExtensionDelegate.swift; sourceTree = "<group>"; };
 		BA5154C1229081AE00420DC1 /* MyNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNetwork.swift; sourceTree = "<group>"; };
 		BA5154C42290848900420DC1 /* AccessData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessData.swift; sourceTree = "<group>"; };
+		BA537BE222928FDF00660B94 /* MyLaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLaunchViewController.swift; sourceTree = "<group>"; };
 		BA857DEE228990E90031AA0B /* MoviesApp_IOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoviesApp_IOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA857DF1228990E90031AA0B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BA857DF3228990E90031AA0B /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 		BA5154B622903DD100420DC1 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				BA537BDE22928EC100660B94 /* LaunchScreen */,
 				BA04F905229151A2009A4EAB /* Details */,
 				BA04F8F222914996009A4EAB /* Favorite */,
 				BA5154B722903DF400420DC1 /* Home */,
@@ -218,6 +221,22 @@
 			path = DataAccess;
 			sourceTree = "<group>";
 		};
+		BA537BDE22928EC100660B94 /* LaunchScreen */ = {
+			isa = PBXGroup;
+			children = (
+				BA537BDF22928EE500660B94 /* View */,
+			);
+			path = LaunchScreen;
+			sourceTree = "<group>";
+		};
+		BA537BDF22928EE500660B94 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				BA537BE222928FDF00660B94 /* MyLaunchViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		BA857DE5228990E90031AA0B = {
 			isa = PBXGroup;
 			children = (
@@ -243,6 +262,7 @@
 				BA0C1BAD2291A69800D3381B /* trailer.png */,
 				BA0C1BAF2291A7A100D3381B /* review.jpg */,
 				BA857E0A228992730031AA0B /* Main.storyboard */,
+				BA857DFD228990F20031AA0B /* LaunchScreen.storyboard */,
 				BA04F8F622914A8F009A4EAB /* Model */,
 				BA5154B422903D8800420DC1 /* Services */,
 				BA5154B622903DD100420DC1 /* Screens */,
@@ -250,7 +270,6 @@
 				BA857DF8228990E90031AA0B /* MoviesApp_IOS.xcdatamodeld */,
 				BA857DF1228990E90031AA0B /* AppDelegate.swift */,
 				BA857DFB228990F20031AA0B /* Assets.xcassets */,
-				BA857DFD228990F20031AA0B /* LaunchScreen.storyboard */,
 				BA857E00228990F20031AA0B /* Info.plist */,
 			);
 			path = MoviesApp_IOS;
@@ -398,6 +417,7 @@
 				BA857DFA228990E90031AA0B /* MoviesApp_IOS.xcdatamodeld in Sources */,
 				BA04F8F822914AD3009A4EAB /* HomeMovies.swift in Sources */,
 				BA5154BC2290401400420DC1 /* HomePresenter.swift in Sources */,
+				BA537BE322928FDF00660B94 /* MyLaunchViewController.swift in Sources */,
 				BA857E12228995DE0031AA0B /* HomeCollectionViewController.swift in Sources */,
 				BA04F8FE22914E8C009A4EAB /* FavoriteDelegate.swift in Sources */,
 				BA857E14228995F70031AA0B /* FavoriteCollectionViewController.swift in Sources */,
