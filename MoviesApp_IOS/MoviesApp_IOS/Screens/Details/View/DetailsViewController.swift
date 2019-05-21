@@ -9,6 +9,7 @@
 import UIKit
 
 class DetailsViewController: UIViewController , UITableViewDataSource , UITableViewDelegate , DetailsDelegate{
+    
     var movie : HomeMovie? = nil;
     
     var detailsPresenter : DetailsPresenter? = nil
@@ -23,12 +24,32 @@ class DetailsViewController: UIViewController , UITableViewDataSource , UITableV
     
     @IBOutlet weak var overviewTextArea: UITextView!
     
+    @IBOutlet weak var trailerTableView: UITableView!
+    
+    @IBOutlet weak var favoritBtn: UIButton!
+    
+    @IBOutlet weak var reviewTableView: UITableView!
+    
+    
     let imageLink : String = "http://image.tmdb.org/t/p/w185/"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        self.trailerTableView.delegate = self
+        self.reviewTableView.delegate = self
+        self.trailerTableView.dataSource = self
+        self.reviewTableView.dataSource = self
+        
         detailsPresenter = DetailsPresenter(detailsViewDelegate: self)
+        
+        //check if movie is favorite movie
+        if(detailsPresenter?.isFavorite(movieID: (movie?.id)!))!{
+            self.favoritBtn.setTitleColor(UIColor.red, for: .normal)
+        }else{
+            self.favoritBtn.setTitleColor(UIColor.darkGray, for: .normal)
+        }
+        
         var tempStrUrl: String = (movie?.poster_path)!
         tempStrUrl = imageLink + tempStrUrl
         print(tempStrUrl)
@@ -45,7 +66,18 @@ class DetailsViewController: UIViewController , UITableViewDataSource , UITableV
     }
     
     @IBAction func addToFavoriteBtn(_ sender: UIButton) {
-        detailsPresenter?.saveMovieToFavorit(movie: movie!)
+      
+        if(sender.currentTitleColor == UIColor.darkGray)
+        {
+            sender.setTitleColor(UIColor.red, for: .normal)
+            detailsPresenter?.saveMovieToFavorit(movie: movie!)
+        }
+        else{
+            sender.setTitleColor(UIColor.darkGray, for: .normal)
+            detailsPresenter?.deleteMovieFromFavorite(movieID : (movie?.id)!)
+            //delete from favorit
+        }
+       
     }
     
     func setMovieToDisplayDetails(movie: HomeMovie) {
@@ -57,22 +89,32 @@ class DetailsViewController: UIViewController , UITableViewDataSource , UITableV
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3;
+        return 7;
     }
-    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if(tableView == reviewTableView){
+            return 110
+        }
+        else{
+             return 50
+        }
+       
+    }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell : UITableViewCell = UITableViewCell()
-        let str :String = tableView.restorationIdentifier!
-        if(str == "TrailerTable"){
-             cell = tableView.dequeueReusableCell(withIdentifier: "TrailerCell", for: indexPath)
+        if(tableView == trailerTableView){
+            cell = tableView.dequeueReusableCell(withIdentifier: "TrailerCell", for: indexPath)
             cell.textLabel?.text = "Trailer"
             cell.imageView?.image = UIImage(named: ("trailer.png"))
         }
-        else
+        else if(tableView == reviewTableView)
         {
-            cell = tableView.dequeueReusableCell(withIdentifier: "ReviewCell", for: indexPath)
-            cell.textLabel?.text = "Review"
-            cell.imageView?.image = UIImage(named: ("review.jpg"))
+            let revCell : ReviewTableViewCell = tableView.dequeueReusableCell(withIdentifier: "ReviewCell", for: indexPath) as! ReviewTableViewCell
+            
+            revCell.reviewAuthorLabel.text = "Review"
+            //revCell.reviewDetails.text = "details"
+            cell = revCell
+          
         }
        
         return cell

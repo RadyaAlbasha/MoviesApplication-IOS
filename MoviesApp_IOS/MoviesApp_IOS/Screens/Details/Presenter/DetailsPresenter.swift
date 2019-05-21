@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import CoreData
+
 class DetailsPresenter {
     let accessData : AccessData
     let detailsViewDelegate : DetailsDelegate
@@ -16,5 +18,20 @@ class DetailsPresenter {
     }
     func saveMovieToFavorit(movie: HomeMovie) {
         accessData.saveMovie(movie: movie)
+    }
+    func isFavorite(movieID : Int32) -> Bool {
+        let MovieArr = accessData.retriveMovies()
+        
+        for movie in MovieArr! {
+            if(movie.id == movieID)
+            {
+                return true
+            }
+        }
+        return false
+    }
+    
+    func deleteMovieFromFavorite(movieID : Int32){
+        accessData.deleteMovie(movieID: movieID)
     }
 }

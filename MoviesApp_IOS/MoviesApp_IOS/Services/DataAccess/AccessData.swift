@@ -39,6 +39,22 @@ class AccessData {
                 print("Saving error")
             }
         }
+        saveHomeMovieToCDMovie(movie: movie)
+        do{
+            try managerContext?.save()
+        }catch{
+            print("Saving error")
+        }
+    }
+    func saveHomeMovieToCDMovie(movie: HomeMovie) {
+        let cdMovie = NSManagedObject(entity: movieEntity!, insertInto: managerContext)
+        cdMovie.setValue(movie.id, forKey: "id")
+        cdMovie.setValue(movie.original_title, forKey: "original_title")
+        cdMovie.setValue(movie.overview, forKey: "overview")
+        cdMovie.setValue(movie.poster_path, forKey: "poster_path")
+        cdMovie.setValue(movie.release_date, forKey: "release_date")
+        cdMovie.setValue(movie.vote_Average, forKey: "vote_Average")
+    
     }
 
     func retriveMovies() -> Array<HomeMovie>? {
@@ -51,7 +67,8 @@ class AccessData {
         }
         var arr : Array<HomeMovie> = Array<HomeMovie>()
         for nsObject in movieArr! {
-            nsObject.
+
+//            nsObject.
             arr.append(HomeMovie(movieID: nsObject.value(forKey: "id") as! Int, original_title: nsObject.value(forKey: "original_title") as! String, poster_path: nsObject.value(forKey: "poster_path") as! String, overview: nsObject.value(forKey: "overview") as! String, release_date: nsObject.value(forKey: "release_date") as! String, vote_Average: nsObject.value(forKey: "vote_Average") as! Float, trailers: <#Array<Trailer>#>))
         }
         return arr;
@@ -74,5 +91,46 @@ class AccessData {
             return true
         }
     }
-    
+    func deleteMovie (movieID : Int){
+        let fecheRequest = NSFetchRequest<NSManagedObject>(entityName: "Movie")
+        var movieArr : Array<NSManagedObject>? = nil
+        do{
+            try movieArr = (managerContext?.fetch(fecheRequest))!
+            for m in movieArr! {
+                if(m.value(forKey: "id") as! Int32 == movieID){
+                    self.managerContext?.delete(m)
+                }
+            }
+        }catch{
+            print("error feche data")
+        }
+        //save change
+        do{
+            try self.managerContext?.save()
+        }catch{
+            print("Error")
+        }
+        
+    }
+//    func saveJSONToCoreData(jsonData : JSON){
+//    
+       // let movie = NSManagedObject(entity: entity! , insertInto: manegerContext)
+//        let results = jsonData["results"]
+//        results.array?.forEach({ (newMovie) in
+//              let movie = NSManagedObject(entity: entity! , insertInto: manegerContext)
+//            movie.setValue(newMovie["original_title"].stringValue , forKey: "original_title")
+//            movie.setValue(newMovie["overview"].stringValue , forKey: "overview")
+//            movie.setValue(newMovie["poster_path"].stringValue , forKey: "poster_path")
+//            movie.setValue(newMovie["release_date"].stringValue , forKey: "release_date")
+//            movie.setValue(newMovie["vote_Average"].floatValue , forKey: "vote_Average")
+//        })
+//        do{
+//            try manegerContext.save()
+//        }
+//        catch let error as NSError{
+//            print(error.localizedDescription)
+//        }
+//    }
+//
+
 }

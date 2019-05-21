@@ -54,11 +54,31 @@ class MyNetwork{
         }
         return movieTrailers
     }
+    
+    func fetchMoviesDataByHighestRated(){
+        DispatchQueue.main.async {
+            Alamofire.request("http://api.themoviedb.org/3/discover/movie?sort_by=vote_average.desc&api_key=a9d917538e1903249a735069026bccbc").responseJSON(completionHandler: { (response) in
+                switch response.result{
+                case .success(let value):
+                    self.json = JSON(value)
+                    self.homePresenter?.setJSON(json: self.json!)
+                    self.homePresenter?.setMoviesArr(moviesArr: (self.saveJSON(jsonData: self.json!)))
+                    
+                    //self.homePresenter.getJSON(json: json)
+                //                    print (self.json!)
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            })
+        }
+    }
+    
     func saveJSON(jsonData : JSON) -> Array<HomeMovie> {
         let results = jsonData["results"]
         var moviesArr = Array<HomeMovie> ()
         results.array?.forEach({ (newMovie) in
             let movie = HomeMovie(movieID: newMovie["id"].intValue ,original_title: newMovie["original_title"].stringValue , poster_path: newMovie["poster_path"].stringValue , overview: newMovie["overview"].stringValue, release_date: newMovie["release_date"].stringValue , vote_Average: newMovie["vote_average"].floatValue , trailers:self.fetchTrailerVideos(movieID: newMovie["id"].intValue))
+
             moviesArr.append(movie)
         })
         return moviesArr

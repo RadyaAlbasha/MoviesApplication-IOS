@@ -14,6 +14,7 @@ import SwiftyJSON
 class HomePresenter : HomePresenterDelegate {
     var homeDelegate: HomeDelegate?
     var network : MyNetwork?
+    var segmentIndex = 0
     //var AccessData: AccessCoreData?
     var json : JSON?
     var moviesArr : Array<HomeMovie>?
@@ -21,13 +22,29 @@ class HomePresenter : HomePresenterDelegate {
         // here we can send the NW Services
         self.network = MyNetwork(presenterDelegete: self)
         //self.AccessData = AccessCoreData()
-        self.network?.fetchMoviesData()
+      //  self.network?.fetchMoviesData()
         self.moviesArr = Array<HomeMovie>()
         /*json = self.network?.getJSON()
         if(json != nil){
             AccessData?.saveJSON(jsonData: json!)
         }*/
        
+    }
+    func setSegmentIndex(index : Int){
+        self.segmentIndex = index
+    }
+    func loadDatafromJson(index : Int){
+         self.segmentIndex = index
+        if (segmentIndex == 0)
+        {
+             self.network?.fetchMoviesData()
+            print("0\n")
+        }
+        else if(segmentIndex == 1){
+            self.network?.fetchMoviesDataByHighestRated()
+            print("1\n")
+            
+        }
     }
    func setDelegate(delegate: HomeDelegate){
         self.homeDelegate = delegate

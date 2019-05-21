@@ -12,6 +12,7 @@ import SDWebImage
 
 class HomeCollectionViewController: UICollectionViewController ,UICollectionViewDelegateFlowLayout{
 
+    @IBOutlet weak var scSegment: UISegmentedControl!
     private let reuseIdentifier = "HomeCell"
     var moviesArr : Array<HomeMovie>?
     var homePresenter: HomePresenter = HomePresenter()
@@ -19,6 +20,7 @@ class HomeCollectionViewController: UICollectionViewController ,UICollectionView
     override func viewDidLoad() {
         super.viewDidLoad()
         self.homePresenter.setDelegate(delegate: self)
+        self.homePresenter.loadDatafromJson(index: 0)
         moviesArr = Array<HomeMovie>()
 
         // Uncomment the following line to preserve selection between presentations
@@ -84,8 +86,13 @@ class HomeCollectionViewController: UICollectionViewController ,UICollectionView
         let height = width * 275 / 185 // retio
         return CGSize(width: width, height: height)
     }
-
-    
+ 
+    @IBAction func scSegmentTapped(_ sender: UISegmentedControl) {
+        let getSegmentIndex = scSegment.selectedSegmentIndex
+      //  homePresenter.setSegmentIndex(index: getSegmentIndex)
+        homePresenter.loadDatafromJson(index: getSegmentIndex)
+       // print("tepped" , getSegmentIndex)
+    }
     // MARK: UICollectionViewDelegate
 
     /*
