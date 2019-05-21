@@ -41,6 +41,7 @@ class HomePresenter : HomePresenterDelegate {
             print("0\n")
         }
         else if(segmentIndex == 1){
+            self.network?.fetchMoviesDataByHighestRated()
             print("1\n")
             
         }

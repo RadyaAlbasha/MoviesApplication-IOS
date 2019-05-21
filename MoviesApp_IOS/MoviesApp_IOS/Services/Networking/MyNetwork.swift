@@ -37,6 +37,25 @@ class MyNetwork{
             })
         }
     }
+    
+    func fetchMoviesDataByHighestRated(){
+        DispatchQueue.main.async {
+            Alamofire.request("http://api.themoviedb.org/3/discover/movie?sort_by=vote_average.desc&api_key=a9d917538e1903249a735069026bccbc").responseJSON(completionHandler: { (response) in
+                switch response.result{
+                case .success(let value):
+                    self.json = JSON(value)
+                    self.homePresenter?.setJSON(json: self.json!)
+                    self.homePresenter?.setMoviesArr(moviesArr: (self.saveJSON(jsonData: self.json!)))
+                    
+                    //self.homePresenter.getJSON(json: json)
+                //                    print (self.json!)
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            })
+        }
+    }
+    
     func saveJSON(jsonData : JSON) -> Array<HomeMovie> {
         let results = jsonData["results"]
         var moviesArr = Array<HomeMovie> ()
