@@ -60,7 +60,7 @@ class MyNetwork{
         let results = jsonData["results"]
         var moviesArr = Array<HomeMovie> ()
         results.array?.forEach({ (newMovie) in
-            let movie = HomeMovie(original_title: newMovie["original_title"].stringValue , poster_path: newMovie["poster_path"].stringValue , overview: newMovie["overview"].stringValue, release_date: newMovie["release_date"].stringValue , vote_Average: newMovie["vote_average"].floatValue)
+            let movie = HomeMovie(id: newMovie["id"].int32Value,original_title: newMovie["original_title"].stringValue , poster_path: newMovie["poster_path"].stringValue , overview: newMovie["overview"].stringValue, release_date: newMovie["release_date"].stringValue , vote_Average: newMovie["vote_average"].floatValue)
             moviesArr.append(movie)
         })
         return moviesArr

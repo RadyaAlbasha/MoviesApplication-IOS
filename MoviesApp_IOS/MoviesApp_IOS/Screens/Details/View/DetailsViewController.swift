@@ -40,8 +40,16 @@ class DetailsViewController: UIViewController , UITableViewDataSource , UITableV
         self.reviewTableView.delegate = self
         self.trailerTableView.dataSource = self
         self.reviewTableView.dataSource = self
-        self.favoritBtn.setTitleColor(UIColor.darkGray, for: .normal)
+        
         detailsPresenter = DetailsPresenter(detailsViewDelegate: self)
+        
+        //check if movie is favorite movie
+        if(detailsPresenter?.isFavorite(movieID: (movie?.id)!))!{
+            self.favoritBtn.setTitleColor(UIColor.red, for: .normal)
+        }else{
+            self.favoritBtn.setTitleColor(UIColor.darkGray, for: .normal)
+        }
+        
         var tempStrUrl: String = (movie?.poster_path)!
         tempStrUrl = imageLink + tempStrUrl
         print(tempStrUrl)
@@ -66,6 +74,7 @@ class DetailsViewController: UIViewController , UITableViewDataSource , UITableV
         }
         else{
             sender.setTitleColor(UIColor.darkGray, for: .normal)
+            detailsPresenter?.deleteMovieFromFavorite(movieID : (movie?.id)!)
             //delete from favorit
         }
        
@@ -106,8 +115,6 @@ class DetailsViewController: UIViewController , UITableViewDataSource , UITableV
             //revCell.reviewDetails.text = "details"
             cell = revCell
           
-            //cell.textLabel?.text = "Review"
-            //cell.imageView?.image = UIImage(named: ("review.jpg"))
         }
        
         return cell

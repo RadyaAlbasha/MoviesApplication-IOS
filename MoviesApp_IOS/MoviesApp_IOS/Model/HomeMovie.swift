@@ -13,8 +13,10 @@ class HomeMovie{
     var poster_path : String
     var release_date : String
     var vote_Average : Float
+    var id : Int32
     
-    init(original_title : String , poster_path: String , overview: String , release_date: String , vote_Average : Float) {
+    init(id : Int32 , original_title : String , poster_path: String , overview: String , release_date: String , vote_Average : Float) {
+        self.id = id
         self.original_title = original_title
         self.overview = overview
         self.poster_path = poster_path

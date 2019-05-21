@@ -167,8 +167,8 @@
 			isa = PBXGroup;
 			children = (
 				447986F62292E94600B87375 /* Protocols */,
-				447986F32292E91800B87375 /* Presenter */,
 				BA04F906229151B2009A4EAB /* View */,
+				447986F32292E91800B87375 /* Presenter */,
 			);
 			path = Details;
 			sourceTree = "<group>";

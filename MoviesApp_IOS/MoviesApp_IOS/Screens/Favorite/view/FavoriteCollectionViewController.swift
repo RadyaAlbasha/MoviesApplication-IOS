@@ -35,6 +35,7 @@ class FavoriteCollectionViewController: UICollectionViewController {
         self.favoritePresenter = FavoritePresenter()
         self.moviesArr = self.favoritePresenter?.fetchMoviesFromCoreData()
         self.favoritePresenter?.setDelegate(delegate: self)
+        self.collectionView?.reloadData()
         
     }
     
