@@ -20,6 +20,7 @@
 		BA04F90222914F98009A4EAB /* FavoriteCollectionViewController_ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA04F90122914F98009A4EAB /* FavoriteCollectionViewController_ExtensionDelegate.swift */; };
 		BA04F90422914FF1009A4EAB /* FavoriteCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA04F90322914FF1009A4EAB /* FavoriteCollectionViewCell.swift */; };
 		BA04F908229167F2009A4EAB /* HomePresenterDelegete.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA04F907229167F2009A4EAB /* HomePresenterDelegete.swift */; };
+		BA07CCA22293361E00E8A3D7 /* Trailer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA07CCA12293361E00E8A3D7 /* Trailer.swift */; };
 		BA0C1BAE2291A69A00D3381B /* trailer.png in Resources */ = {isa = PBXBuildFile; fileRef = BA0C1BAD2291A69800D3381B /* trailer.png */; };
 		BA0C1BB02291A7A300D3381B /* review.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BA0C1BAF2291A7A100D3381B /* review.jpg */; };
 		BA4848412290B684003F286E /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = BA4848402290B683003F286E /* placeholder.png */; };
@@ -51,6 +52,7 @@
 		BA04F90122914F98009A4EAB /* FavoriteCollectionViewController_ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCollectionViewController_ExtensionDelegate.swift; sourceTree = "<group>"; };
 		BA04F90322914FF1009A4EAB /* FavoriteCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCollectionViewCell.swift; sourceTree = "<group>"; };
 		BA04F907229167F2009A4EAB /* HomePresenterDelegete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePresenterDelegete.swift; sourceTree = "<group>"; };
+		BA07CCA12293361E00E8A3D7 /* Trailer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trailer.swift; sourceTree = "<group>"; };
 		BA0C1BAD2291A69800D3381B /* trailer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trailer.png; sourceTree = "<group>"; };
 		BA0C1BAF2291A7A100D3381B /* review.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = review.jpg; sourceTree = "<group>"; };
 		BA4848402290B683003F286E /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder.png; sourceTree = "<group>"; };
@@ -115,7 +117,6 @@
 				DF150A76BF21482771285A26 /* Pods-MoviesApp_IOS.debug.xcconfig */,
 				D974146482025F95EF096287 /* Pods-MoviesApp_IOS.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -159,6 +160,7 @@
 			isa = PBXGroup;
 			children = (
 				447986EB2292E22100B87375 /* HomeMovie.swift */,
+				BA07CCA12293361E00E8A3D7 /* Trailer.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -430,6 +432,7 @@
 			files = (
 				BA04F8F122914389009A4EAB /* HomeCollectionViewCell.swift in Sources */,
 				BA857DF4228990E90031AA0B /* DetailsViewController.swift in Sources */,
+				BA07CCA22293361E00E8A3D7 /* Trailer.swift in Sources */,
 				BA857DF2228990E90031AA0B /* AppDelegate.swift in Sources */,
 				BA5154C02290433400420DC1 /* HomeCollectionViewController_ExtensionDelegate.swift in Sources */,
 				BA04F90422914FF1009A4EAB /* FavoriteCollectionViewCell.swift in Sources */,

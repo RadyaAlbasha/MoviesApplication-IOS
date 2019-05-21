@@ -37,11 +37,28 @@ class MyNetwork{
             })
         }
     }
+    func fetchTrailerVideos(movieID: Int) -> Array<Trailer>{
+        var movieTrailers = Array<Trailer>()
+        Alamofire.request("https://api.themoviedb.org/3/movie/11852/videos?language=en-US&api_key=a9d917538e1903249a735069026bccbc").responseJSON { (response) in
+            switch response.result{
+            case .success(let value):
+                    let trailers = JSON(value)["results"]
+                    trailers.array?.forEach({(trailer) in
+                        let trailerObj = Trailer(trailerName: trailer["name"].stringValue, key: trailer["key"].stringValue)
+                         movieTrailers.append(trailerObj)
+                    })
+               
+            case .failure(let error):
+                    print(error.localizedDescription)
+            }
+        }
+        return movieTrailers
+    }
     func saveJSON(jsonData : JSON) -> Array<HomeMovie> {
         let results = jsonData["results"]
         var moviesArr = Array<HomeMovie> ()
         results.array?.forEach({ (newMovie) in
-            let movie = HomeMovie(original_title: newMovie["original_title"].stringValue , poster_path: newMovie["poster_path"].stringValue , overview: newMovie["overview"].stringValue, release_date: newMovie["release_date"].stringValue , vote_Average: newMovie["vote_average"].floatValue)
+            let movie = HomeMovie(movieID: newMovie["id"].intValue ,original_title: newMovie["original_title"].stringValue , poster_path: newMovie["poster_path"].stringValue , overview: newMovie["overview"].stringValue, release_date: newMovie["release_date"].stringValue , vote_Average: newMovie["vote_average"].floatValue , trailers:self.fetchTrailerVideos(movieID: newMovie["id"].intValue))
             moviesArr.append(movie)
         })
         return moviesArr
