@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		351EC46B1E9564CFFF341992 /* Pods_MoviesApp_IOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F48A92B9A3019E16768000D9 /* Pods_MoviesApp_IOS.framework */; };
 		447986E82292E1BB00B87375 /* AccessData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447986E72292E1BB00B87375 /* AccessData.swift */; };
 		447986EA2292E1D700B87375 /* MyNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447986E92292E1D700B87375 /* MyNetwork.swift */; };
 		447986EC2292E22100B87375 /* HomeMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447986EB2292E22100B87375 /* HomeMovie.swift */; };
@@ -27,6 +26,7 @@
 		BA5154BE2290406000420DC1 /* HomeDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5154BD2290406000420DC1 /* HomeDelegate.swift */; };
 		BA5154C02290433400420DC1 /* HomeCollectionViewController_ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5154BF2290433400420DC1 /* HomeCollectionViewController_ExtensionDelegate.swift */; };
 		BA537BE322928FDF00660B94 /* MyLaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA537BE222928FDF00660B94 /* MyLaunchViewController.swift */; };
+		BA7461E422942CF200651671 /* ReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7461E322942CF200651671 /* ReviewTableViewCell.swift */; };
 		BA857DF2228990E90031AA0B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA857DF1228990E90031AA0B /* AppDelegate.swift */; };
 		BA857DF4228990E90031AA0B /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA857DF3228990E90031AA0B /* DetailsViewController.swift */; };
 		BA857DFA228990E90031AA0B /* MoviesApp_IOS.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BA857DF8228990E90031AA0B /* MoviesApp_IOS.xcdatamodeld */; };
@@ -35,7 +35,7 @@
 		BA857E0C228992730031AA0B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA857E0A228992730031AA0B /* Main.storyboard */; };
 		BA857E12228995DE0031AA0B /* HomeCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA857E11228995DE0031AA0B /* HomeCollectionViewController.swift */; };
 		BA857E14228995F70031AA0B /* FavoriteCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA857E13228995F70031AA0B /* FavoriteCollectionViewController.swift */; };
-		BAEFEA58229305270092A078 /* ReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAEFEA57229305270092A078 /* ReviewTableViewCell.swift */; };
+		BAEFEA58229305270092A078 /* (null) in Sources */ = {isa = PBXBuildFile; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +59,7 @@
 		BA5154BD2290406000420DC1 /* HomeDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDelegate.swift; sourceTree = "<group>"; };
 		BA5154BF2290433400420DC1 /* HomeCollectionViewController_ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewController_ExtensionDelegate.swift; sourceTree = "<group>"; };
 		BA537BE222928FDF00660B94 /* MyLaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLaunchViewController.swift; sourceTree = "<group>"; };
+		BA7461E322942CF200651671 /* ReviewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReviewTableViewCell.swift; path = ../../../../../../releas/4/MoviesApp_IOS/MoviesApp_IOS/Screens/Details/View/ReviewTableViewCell.swift; sourceTree = "<group>"; };
 		BA857DEE228990E90031AA0B /* MoviesApp_IOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoviesApp_IOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA857DF1228990E90031AA0B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BA857DF3228990E90031AA0B /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
@@ -78,7 +79,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3F65FB5532FDE90E8B776BF7 /* Pods_MoviesApp_IOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -116,7 +116,6 @@
 				DF150A76BF21482771285A26 /* Pods-MoviesApp_IOS.debug.xcconfig */,
 				D974146482025F95EF096287 /* Pods-MoviesApp_IOS.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -178,7 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				BA857DF3228990E90031AA0B /* DetailsViewController.swift */,
-				BAEFEA57229305270092A078 /* ReviewTableViewCell.swift */,
+				BA7461E322942CF200651671 /* ReviewTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -308,15 +307,6 @@
 				BA857E00228990F20031AA0B /* Info.plist */,
 			);
 			path = MoviesApp_IOS;
-			sourceTree = "<group>";
-		};
-		C83D52F3DC0282AD796D6615 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				3870D60CC45B0D39ACE40005 /* Pods-MoviesApp_IOS.debug.xcconfig */,
-				0F2D0FEB973514F7433AED13 /* Pods-MoviesApp_IOS.release.xcconfig */,
-			);
-			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -456,9 +446,10 @@
 				447986EA2292E1D700B87375 /* MyNetwork.swift in Sources */,
 				BA537BE322928FDF00660B94 /* MyLaunchViewController.swift in Sources */,
 				BA857E12228995DE0031AA0B /* HomeCollectionViewController.swift in Sources */,
+				BA7461E422942CF200651671 /* ReviewTableViewCell.swift in Sources */,
 				BA04F8FE22914E8C009A4EAB /* FavoriteDelegate.swift in Sources */,
 				BA857E14228995F70031AA0B /* FavoriteCollectionViewController.swift in Sources */,
-				BAEFEA58229305270092A078 /* ReviewTableViewCell.swift in Sources */,
+				BAEFEA58229305270092A078 /* (null) in Sources */,
 				BA5154BE2290406000420DC1 /* HomeDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
