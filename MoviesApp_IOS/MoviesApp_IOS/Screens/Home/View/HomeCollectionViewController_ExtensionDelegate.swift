@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 extension HomeCollectionViewController : HomeDelegate{
     
-    func setMoviesArr(moviesArr : Array<HomeMovies>) {
+    func setMoviesArr(moviesArr : Array<HomeMovie>) {
         self.moviesArr = moviesArr
         self.collectionView?.reloadData()
     }

@@ -33,8 +33,8 @@ class FavoriteCollectionViewController: UICollectionViewController {
         super.viewDidAppear(animated)
         //bgeb ely 3amlalo save kolo
         self.favoritePresenter = FavoritePresenter()
-        self.moviesArr = self.favoritePresenter!.fetchMoviesFromCoreData()
-        self.favoritePresenter!.setDelegate(delegate: self)
+        self.moviesArr = self.favoritePresenter.fetchMoviesFromCoreData()
+        self.favoritePresenter.setDelegate(delegate: self)
         
     }
     
