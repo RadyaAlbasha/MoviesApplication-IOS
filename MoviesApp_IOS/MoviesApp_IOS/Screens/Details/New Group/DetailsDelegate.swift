@@ -7,8 +7,7 @@
 //
 
 import Foundation
-import CoreData
+
 protocol DetailsDelegate {
     func setMovieToDisplayDetails(movie : HomeMovie);
-    
 }
