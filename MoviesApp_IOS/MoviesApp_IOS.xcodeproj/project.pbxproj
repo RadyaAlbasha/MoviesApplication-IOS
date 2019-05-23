@@ -12,6 +12,7 @@
 		447986EC2292E22100B87375 /* HomeMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447986EB2292E22100B87375 /* HomeMovie.swift */; };
 		447986F22292E90E00B87375 /* DetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447986F12292E90E00B87375 /* DetailsPresenter.swift */; };
 		447986F52292E93C00B87375 /* DetailsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447986F42292E93B00B87375 /* DetailsDelegate.swift */; };
+		8BCF4CACB3E962007C0486C9 /* Pods_MoviesApp_IOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11F69F3F52F26DB726E99C69 /* Pods_MoviesApp_IOS.framework */; };
 		9E9AF268228C561600749A5B /* 2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9E9AF267228C561600749A5B /* 2.jpg */; };
 		BA04F8F122914389009A4EAB /* HomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA04F8F022914389009A4EAB /* HomeCollectionViewCell.swift */; };
 		BA04F8FE22914E8C009A4EAB /* FavoriteDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA04F8FD22914E8C009A4EAB /* FavoriteDelegate.swift */; };
@@ -36,7 +37,7 @@
 		BA857E12228995DE0031AA0B /* HomeCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA857E11228995DE0031AA0B /* HomeCollectionViewController.swift */; };
 		BA857E14228995F70031AA0B /* FavoriteCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA857E13228995F70031AA0B /* FavoriteCollectionViewController.swift */; };
 		BAEFB799229498D8005A064C /* ReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAEFB798229498D8005A064C /* ReviewTableViewCell.swift */; };
-		BAEFEA58229305270092A078 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		BAEFEA58229305270092A078 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -81,6 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BCF4CACB3E962007C0486C9 /* Pods_MoviesApp_IOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -452,7 +454,7 @@
 				BA857E12228995DE0031AA0B /* HomeCollectionViewController.swift in Sources */,
 				BA04F8FE22914E8C009A4EAB /* FavoriteDelegate.swift in Sources */,
 				BA857E14228995F70031AA0B /* FavoriteCollectionViewController.swift in Sources */,
-				BAEFEA58229305270092A078 /* (null) in Sources */,
+				BAEFEA58229305270092A078 /* BuildFile in Sources */,
 				BAEFB799229498D8005A064C /* ReviewTableViewCell.swift in Sources */,
 				BA5154BE2290406000420DC1 /* HomeDelegate.swift in Sources */,
 			);

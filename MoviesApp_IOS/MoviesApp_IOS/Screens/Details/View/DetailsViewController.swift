@@ -126,5 +126,18 @@ class DetailsViewController: UIViewController , UITableViewDataSource , UITableV
        
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if(tableView == reviewTableView){
+            print("review selected")
+        }
+        else{
+            print("trailer selected")
+           var url = URL(string: "youtube://\(movie?.trailers![indexPath.row].key)")!
+            if (!UIApplication.shared.canOpenURL(url)){
+                url = URL(string:"http://www.youtube.com/watch?v=\(movie?.trailers![indexPath.row].key)")!}
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
+    }
 }
 
