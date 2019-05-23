@@ -44,7 +44,7 @@ class DetailsViewController: UIViewController , UITableViewDataSource , UITableV
         detailsPresenter = DetailsPresenter(detailsViewDelegate: self)
         
         //check if movie is favorite movie
-        if(detailsPresenter?.isFavorite(movieID: (movie?.id)!))!{
+        if(detailsPresenter?.isFavorite(movieID: (movie?.movieID)!))!{
             self.favoritBtn.setTitleColor(UIColor.red, for: .normal)
         }else{
             self.favoritBtn.setTitleColor(UIColor.darkGray, for: .normal)
@@ -52,7 +52,7 @@ class DetailsViewController: UIViewController , UITableViewDataSource , UITableV
         
         var tempStrUrl: String = (movie?.poster_path)!
         tempStrUrl = imageLink + tempStrUrl
-        print(tempStrUrl)
+//        print(tempStrUrl)
         posterImage.sd_setImage(with: URL(string: tempStrUrl), placeholderImage: UIImage(named: "placeholder.png"))
         movieTitleLabel.text = movie?.original_title
         releaseDateLabel.text=movie?.release_date
@@ -74,7 +74,7 @@ class DetailsViewController: UIViewController , UITableViewDataSource , UITableV
         }
         else{
             sender.setTitleColor(UIColor.darkGray, for: .normal)
-            detailsPresenter?.deleteMovieFromFavorite(movieID : (movie?.id)!)
+            detailsPresenter?.deleteMovieFromFavorite(movieID : Int32((movie?.movieID)!))
             //delete from favorit
         }
        
@@ -89,7 +89,14 @@ class DetailsViewController: UIViewController , UITableViewDataSource , UITableV
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 7;
+        if(tableView == reviewTableView){
+            return 1
+        }
+        else{
+            print("\((movie?.trailers!.count)!)**")
+            return (movie?.trailers!.count)!;
+        }
+        
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if(tableView == reviewTableView){
@@ -104,12 +111,12 @@ class DetailsViewController: UIViewController , UITableViewDataSource , UITableV
         var cell : UITableViewCell = UITableViewCell()
         if(tableView == trailerTableView){
             cell = tableView.dequeueReusableCell(withIdentifier: "TrailerCell", for: indexPath)
-            cell.textLabel?.text = "Trailer"
+            cell.textLabel?.text = movie?.trailers![indexPath.row].trailerName
             cell.imageView?.image = UIImage(named: ("trailer.png"))
         }
         else if(tableView == reviewTableView)
         {
-            let revCell : ReviewTableViewCell = tableView.dequeueReusableCell(withIdentifier: "ReviewCell", for: indexPath) as! ReviewTableViewCell
+            let revCell = tableView.dequeueReusableCell(withIdentifier: "ReviewCell", for: indexPath) as! ReviewTableViewCell
             
             revCell.reviewAuthorLabel.text = "Review"
             //revCell.reviewDetails.text = "details"

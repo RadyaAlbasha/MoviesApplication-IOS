@@ -7,7 +7,7 @@
 //
 
 import Foundation
-class Trailer {
+class TrailerData {
     var trailerName: String
     var key :String
     

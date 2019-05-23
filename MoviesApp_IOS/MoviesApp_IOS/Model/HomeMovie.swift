@@ -14,15 +14,17 @@ class HomeMovie{
     var poster_path : String
     var release_date : String
     var vote_Average : Float
-    var trailers : Array<Trailer>
+    var trailers : Array<TrailerData>?
     
-    init(movieID : Int , original_title : String , poster_path: String , overview: String , release_date: String , vote_Average : Float , trailers : Array<Trailer>) {
+    init(movieID : Int , original_title : String , poster_path: String , overview: String , release_date: String , vote_Average : Float) {
         self.original_title = original_title
         self.overview = overview
         self.poster_path = poster_path
         self.release_date = release_date
         self.vote_Average = vote_Average
         self.movieID = movieID
+    }
+    func setTrailers(trailers : Array<TrailerData>){
         self.trailers = trailers
     }
     

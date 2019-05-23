@@ -19,19 +19,20 @@ class DetailsPresenter {
     func saveMovieToFavorit(movie: HomeMovie) {
         accessData.saveMovie(movie: movie)
     }
-    func isFavorite(movieID : Int32) -> Bool {
-        let MovieArr = accessData.retriveMovies()
-        
-        for movie in MovieArr! {
-            if(movie.id == movieID)
-            {
-                return true
-            }
-        }
-        return false
+    func isFavorite(movieID : Int) -> Bool {
+//        let MovieArr = accessData.retriveMovies()
+//
+//        for movie in MovieArr! {
+//            if(movie.movieID == movieID)
+//            {
+//                return true
+//            }
+//        }
+//        return false
+        return accessData.movieIsAlreadyExist(movieID: movieID)
     }
     
     func deleteMovieFromFavorite(movieID : Int32){
-        accessData.deleteMovie(movieID: movieID)
+        accessData.deleteMovie(movieID: Int(movieID))
     }
 }
