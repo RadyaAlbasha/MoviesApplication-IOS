@@ -25,6 +25,6 @@ class FavoritePresenter{
     {
         return accessData.retriveMovies()!;
     }
-  
+    
     
 }

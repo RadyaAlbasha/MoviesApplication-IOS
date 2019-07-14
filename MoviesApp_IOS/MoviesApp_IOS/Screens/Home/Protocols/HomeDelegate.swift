@@ -10,8 +10,9 @@ import Foundation
 import UIKit
 protocol HomeDelegate {
     func setMoviesArr(moviesArr : Array<HomeMovie>)
+    func showInternetConnectionAlert()
     //func showMovieDetails(segueDestination : String)
-   // func showMovieDetails()
+    // func showMovieDetails()
     // func downloadImage(imageView : UIImageView)
     
     

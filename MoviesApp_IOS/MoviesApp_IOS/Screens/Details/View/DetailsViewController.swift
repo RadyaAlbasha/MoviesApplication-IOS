@@ -12,8 +12,6 @@ class DetailsViewController: UIViewController , UITableViewDataSource , UITableV
     
     var movie : HomeMovie? = nil;
     
-    var detailsPresenter : DetailsPresenter? = nil
-
     @IBOutlet weak var posterImage: UIImageView!
     
     @IBOutlet weak var movieTitleLabel: UILabel!
@@ -22,7 +20,7 @@ class DetailsViewController: UIViewController , UITableViewDataSource , UITableV
     
     @IBOutlet weak var voteAverage: UILabel!
     
-    @IBOutlet weak var overviewTextArea: UITextView!
+    @IBOutlet weak var overviewLabel: UILabel!
     
     @IBOutlet weak var trailerTableView: UITableView!
     
@@ -32,7 +30,9 @@ class DetailsViewController: UIViewController , UITableViewDataSource , UITableV
     
     
     let imageLink : String = "http://image.tmdb.org/t/p/w185/"
-    
+    var trailersArr : Array<Trailer>?
+    var reviewsArr : Array<Review>?
+    var detailsPresenterDelegate: DetailsPresenter?
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -40,11 +40,14 @@ class DetailsViewController: UIViewController , UITableViewDataSource , UITableV
         self.reviewTableView.delegate = self
         self.trailerTableView.dataSource = self
         self.reviewTableView.dataSource = self
+        trailersArr = Array<Trailer>()
+        reviewsArr = Array<Review>()
         
-        detailsPresenter = DetailsPresenter(detailsViewDelegate: self)
-        
+        detailsPresenterDelegate = DetailsPresenter(detailsViewDelegate: self)
+        detailsPresenterDelegate?.getTrailerOfMovies(movieId: (movie?.id)!)
+        detailsPresenterDelegate?.getReviewsOfMovies(movieId: (movie?.id)!)
         //check if movie is favorite movie
-        if(detailsPresenter?.isFavorite(movieID: (movie?.movieID)!))!{
+        if(detailsPresenterDelegate?.isFavorite(movieID: (movie?.id)!))!{
             self.favoritBtn.setTitleColor(UIColor.red, for: .normal)
         }else{
             self.favoritBtn.setTitleColor(UIColor.darkGray, for: .normal)
@@ -52,36 +55,46 @@ class DetailsViewController: UIViewController , UITableViewDataSource , UITableV
         
         var tempStrUrl: String = (movie?.poster_path)!
         tempStrUrl = imageLink + tempStrUrl
-//        print(tempStrUrl)
+        print(tempStrUrl)
         posterImage.sd_setImage(with: URL(string: tempStrUrl), placeholderImage: UIImage(named: "placeholder.png"))
         movieTitleLabel.text = movie?.original_title
         releaseDateLabel.text=movie?.release_date
         voteAverage.text="\((movie?.vote_Average)!) "
-        overviewTextArea.text = movie?.overview
+        overviewLabel.text = movie?.overview
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
     @IBAction func addToFavoriteBtn(_ sender: UIButton) {
-      
+        
         if(sender.currentTitleColor == UIColor.darkGray)
         {
             sender.setTitleColor(UIColor.red, for: .normal)
-            detailsPresenter?.saveMovieToFavorit(movie: movie!)
+            detailsPresenterDelegate?.saveMovieToFavorit(movie: movie!)
         }
         else{
             sender.setTitleColor(UIColor.darkGray, for: .normal)
-            detailsPresenter?.deleteMovieFromFavorite(movieID : Int32((movie?.movieID)!))
+            detailsPresenterDelegate?.deleteMovieFromFavorite(movieID : (movie?.id)!)
             //delete from favorit
         }
-       
+        
     }
     
     func setMovieToDisplayDetails(movie: HomeMovie) {
         self.movie = movie;
+    }
+    
+    func setTrailersForTable(trailerArr: [Trailer]) {
+        self.trailersArr = trailerArr
+        self.trailerTableView.reloadData()
+    }
+    
+    func setReviewsForTable(reviewArr: [Review]) {
+        self.reviewsArr = reviewArr
+        self.reviewTableView.reloadData()
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -90,53 +103,51 @@ class DetailsViewController: UIViewController , UITableViewDataSource , UITableV
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if(tableView == reviewTableView){
-            return 1
+            return (reviewsArr?.count)!
         }
         else{
-            print("\((movie?.trailers!.count)!)**")
-            return (movie?.trailers!.count)!;
+            return (trailersArr?.count)!
         }
-        
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if(tableView == reviewTableView){
-            return 110
+        //return UITableViewAutomaticDimension
+        if(tableView == trailerTableView){
+            return 94
+        }else{
+            return UITableViewAutomaticDimension
         }
-        else{
-             return 50
-        }
-       
+        
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell : UITableViewCell = UITableViewCell()
         if(tableView == trailerTableView){
-            cell = tableView.dequeueReusableCell(withIdentifier: "TrailerCell", for: indexPath)
-            cell.textLabel?.text = movie?.trailers![indexPath.row].trailerName
-            cell.imageView?.image = UIImage(named: ("trailer.png"))
+            let trailerCell : TrailerTableViewCell = tableView.dequeueReusableCell(withIdentifier: "TrailerCell", for: indexPath) as! TrailerTableViewCell
+            //trailerCell.TrailerNameLabel.text = "dcdcvdxscdsc"
+            trailerCell.TrailerNameLabel.text = trailersArr![indexPath.row].trailerName
+            //print(trailersArr![indexPath.row].trailerName)
+            trailerCell.trailerImageView.sd_setImage(with: URL(string: "http://img.youtube.com/vi/" + trailersArr![indexPath.row].key + "/maxresdefault.jpg"), placeholderImage: UIImage(named: "trailer.png"))
+            cell = trailerCell
+            
         }
         else if(tableView == reviewTableView)
         {
-            let revCell = tableView.dequeueReusableCell(withIdentifier: "ReviewCell", for: indexPath) as! ReviewTableViewCell
+            let revCell : ReviewTableViewCell = tableView.dequeueReusableCell(withIdentifier: "ReviewCell", for: indexPath) as! ReviewTableViewCell
             
-            revCell.reviewAuthorLabel.text = "Review"
-            //revCell.reviewDetails.text = "details"
+            revCell.reviewAuthorLabel.text = reviewsArr![indexPath.row].reviewAuthor
+            revCell.reviewDetails.text = reviewsArr![indexPath.row].reviewContent
             cell = revCell
-          
+            
         }
-       
+        
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if(tableView == reviewTableView){
-            print("review selected")
-        }
-        else{
-            print("trailer selected")
-           var url = URL(string: "youtube://\(movie?.trailers![indexPath.row].key)")!
-            if (!UIApplication.shared.canOpenURL(url)){
-                url = URL(string:"http://www.youtube.com/watch?v=\(movie?.trailers![indexPath.row].key)")!}
-            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        if(tableView == trailerTableView){
+            let urlStr = "http://www.youtube.com/watch?v=" + trailersArr![indexPath.row].key
+            if let url = URL(string: urlStr){
+                UIApplication.shared.openURL(url)
+            }
         }
     }
 }

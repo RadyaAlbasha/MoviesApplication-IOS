@@ -14,45 +14,33 @@ class AccessData {
     var appDeleget : AppDelegate?
     let managerContext : NSManagedObjectContext?
     let movieEntity : NSEntityDescription?
-    let trailerEntity : NSEntityDescription?
     init() {
+        //        appDeleget = AppDelegate()
+        //        DispatchQueue.main.async {
         self.appDeleget = (UIApplication.shared.delegate as! AppDelegate)
+        //        }
         managerContext = appDeleget?.persistentContainer.viewContext
         movieEntity = NSEntityDescription.entity(forEntityName: "Movie", in: managerContext!)
-        trailerEntity = NSEntityDescription.entity(forEntityName: "TrailerEntity", in: managerContext!)
     }
-    
     func saveMovie(movie: HomeMovie) {
-        if(!movieIsAlreadyExist(movieID: movie.movieID)){
-            
-            let cdMovie = NSManagedObject(entity: movieEntity!, insertInto: managerContext)
-            cdMovie.setValue(movie.movieID, forKey: "id")
-            cdMovie.setValue(movie.original_title, forKey: "original_title")
-            cdMovie.setValue(movie.overview, forKey: "overview")
-            cdMovie.setValue(movie.poster_path, forKey: "poster_path")
-            cdMovie.setValue(movie.release_date, forKey: "release_date")
-            cdMovie.setValue(movie.vote_Average, forKey: "vote_Average")
-            for element in movie.trailers!{
-                let mTrailer = NSManagedObject(entity: trailerEntity!, insertInto: managerContext)
-                mTrailer.setValue(element.trailerName, forKey: "name")
-                mTrailer.setValue(element.key, forKey: "key")
-                cdMovie.mutableSetValue(forKeyPath: "movieTrailer").add(mTrailer)
-            }
-            do{
-                try managerContext?.save()
-            }catch{
-                print("Saving error")
-            }
-        }
-//        saveHomeMovieToCDMovie(movie: movie)
+        saveHomeMovieToCDMovie(movie: movie)
         do{
             try managerContext?.save()
         }catch{
             print("Saving error")
         }
     }
-
-
+    func saveHomeMovieToCDMovie(movie: HomeMovie) {
+        let cdMovie = NSManagedObject(entity: movieEntity!, insertInto: managerContext)
+        cdMovie.setValue(movie.id, forKey: "id")
+        cdMovie.setValue(movie.original_title, forKey: "original_title")
+        cdMovie.setValue(movie.overview, forKey: "overview")
+        cdMovie.setValue(movie.poster_path, forKey: "poster_path")
+        cdMovie.setValue(movie.release_date, forKey: "release_date")
+        cdMovie.setValue(movie.vote_Average, forKey: "vote_Average")
+        
+    }
+    //    func retriveMovies() -> Array<NSManagedObject>? {
     func retriveMovies() -> Array<HomeMovie>? {
         let fecheRequest = NSFetchRequest<NSManagedObject>(entityName: "Movie")
         var movieArr : Array<NSManagedObject>? = nil
@@ -62,36 +50,13 @@ class AccessData {
             print("error feche data")
         }
         var arr : Array<HomeMovie> = Array<HomeMovie>()
-        for managedMovieObj in movieArr! {
-
-            let trailerArr = (managedMovieObj.value(forKey: "movieTrailer") as! NSSet).allObjects as! [NSManagedObject]
-            var trailers = Array<TrailerData>()
-            for t in trailerArr{
-                trailers.append(TrailerData(trailerName: t.value(forKey: "name") as! String , key: t.value(forKey: "key") as! String))
-            }
-            arr.append(HomeMovie(movieID: managedMovieObj.value(forKey: "id") as! Int, original_title: managedMovieObj.value(forKey: "original_title") as! String, poster_path: managedMovieObj.value(forKey: "poster_path") as! String, overview: managedMovieObj.value(forKey: "overview") as! String, release_date: managedMovieObj.value(forKey: "release_date") as! String, vote_Average: managedMovieObj.value(forKey: "vote_Average") as! Float))
+        for nsObject in movieArr! {
+            arr.append(HomeMovie(id: nsObject.value(forKey: "id") as! Int32,
+                                 original_title: nsObject.value(forKey: "original_title") as! String, poster_path: nsObject.value(forKey: "poster_path") as! String, overview: nsObject.value(forKey: "overview") as! String, release_date: nsObject.value(forKey: "release_date") as! String, vote_Average: nsObject.value(forKey: "vote_Average") as! Float))
         }
         return arr;
     }
-    func movieIsAlreadyExist(movieID : Int) -> Bool {
-        //Not    working
-        let fecheRequest = NSFetchRequest<NSManagedObject>(entityName: "Movie")
-        fecheRequest.predicate = NSPredicate(format: "%K == %i", "id" , movieID)
-        do{
-            var result :Array<NSManagedObject>?
-            try result = (managerContext?.fetch(fecheRequest))!
-            if(result?.count == 0 ){
-                return false
-            }
-            else{
-                return true
-            }
-        }catch{
-            print("error")
-            return true
-        }
-    }
-    func deleteMovie (movieID : Int){
+    func deleteMovie (movieID : Int32){
         let fecheRequest = NSFetchRequest<NSManagedObject>(entityName: "Movie")
         var movieArr : Array<NSManagedObject>? = nil
         do{
@@ -112,6 +77,25 @@ class AccessData {
         }
         
     }
-
-
+    //    func saveJSONToCoreData(jsonData : JSON){
+    //
+    // let movie = NSManagedObject(entity: entity! , insertInto: manegerContext)
+    //        let results = jsonData["results"]
+    //        results.array?.forEach({ (newMovie) in
+    //              let movie = NSManagedObject(entity: entity! , insertInto: manegerContext)
+    //            movie.setValue(newMovie["original_title"].stringValue , forKey: "original_title")
+    //            movie.setValue(newMovie["overview"].stringValue , forKey: "overview")
+    //            movie.setValue(newMovie["poster_path"].stringValue , forKey: "poster_path")
+    //            movie.setValue(newMovie["release_date"].stringValue , forKey: "release_date")
+    //            movie.setValue(newMovie["vote_Average"].floatValue , forKey: "vote_Average")
+    //        })
+    //        do{
+    //            try manegerContext.save()
+    //        }
+    //        catch let error as NSError{
+    //            print(error.localizedDescription)
+    //        }
+    //    }
+    //
+    
 }

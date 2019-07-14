@@ -13,12 +13,19 @@ import SwiftyJSON
 class MyNetwork{
     var accessData: AccessData?
     var homePresenter : HomePresenterDelegate?
+    var detailsPresenter: DetailsPresenterDelegate?
     var json :JSON?
-    init(presenterDelegete : HomePresenterDelegate) {
+    init() {
         self.accessData = AccessData()
-        self.homePresenter = presenterDelegete
         
-        
+    }
+    func setHomePresenterDelegete(homePresenterDelegete : HomePresenterDelegate)
+    {
+        self.homePresenter = homePresenterDelegete
+    }
+    func setDetailsPresenterDelegete(detailsPresenterDelegate : DetailsPresenterDelegate)
+    {
+        self.detailsPresenter = detailsPresenterDelegate
     }
     func fetchMoviesData(){
         DispatchQueue.main.async {
@@ -30,14 +37,14 @@ class MyNetwork{
                     self.homePresenter?.setMoviesArr(moviesArr: (self.saveJSON(jsonData: self.json!)))
                     
                     //self.homePresenter.getJSON(json: json)
-//                    print (self.json!)
+                //                    print (self.json!)
                 case .failure(let error):
+                    self.homePresenter?.showAlert()
                     print(error.localizedDescription)
                 }
             })
         }
     }
-
     
     func fetchMoviesDataByHighestRated(){
         DispatchQueue.main.async {
@@ -48,61 +55,62 @@ class MyNetwork{
                     self.homePresenter?.setJSON(json: self.json!)
                     self.homePresenter?.setMoviesArr(moviesArr: (self.saveJSON(jsonData: self.json!)))
                     
+                    //self.homePresenter.getJSON(json: json)
+                //                    print (self.json!)
                 case .failure(let error):
                     print(error.localizedDescription)
                 }
             })
         }
     }
-    func fetchTrailerVideos(movieID: Int ,completion: @escaping (Result<Array<TrailerData>>) -> Void){
-        
-        var movieTrailers = Array<TrailerData>()
-        
-        Alamofire.request("https://api.themoviedb.org/3/movie/\(movieID)/videos?api_key=a9d917538e1903249a735069026bccbc").responseJSON( completionHandler: { (response) in
+    
+    func fetchMoviesReview(movieID : Int32){
+        var reviewArr = [Review]()
+        print("https://api.themoviedb.org/3/movie/\(movieID)/reviews?api_key=a9d917538e1903249a735069026bccbc")
+        Alamofire.request("https://api.themoviedb.org/3/movie/\(movieID)/reviews?api_key=a9d917538e1903249a735069026bccbc").responseJSON{ (response) in
             switch response.result{
             case .success(let value):
-                let trailers = JSON(value)["results"]
-                trailers.array?.forEach({(trailer) in
-                    let trailerObj = TrailerData(trailerName: trailer["name"].stringValue, key: trailer["key"].stringValue)
-                    movieTrailers.append(trailerObj)
-                    //                        print(trailerObj.trailerName)
+                let json = JSON(value)
+                let results = json["results"]
+                results.array?.forEach({(rev) in
+                    let review = Review(author: rev["author"].stringValue,content: rev["content"].stringValue)
+                    reviewArr.append(review)
                 })
-                completion(.success(movieTrailers))
+                self.detailsPresenter!.setReviewArray(reviewsOfMovie : reviewArr)
             case .failure(let error):
-                completion(.failure(error))
                 print(error.localizedDescription)
             }
-        })
+        }
     }
-
+    
+    func fetchMoviesTraliers(movieID : Int32){
+        var traliersArr = [Trailer]()
+        Alamofire.request("https://api.themoviedb.org/3/movie/\(movieID)/videos?api_key=a9d917538e1903249a735069026bccbc").responseJSON{ (response) in
+            switch response.result{
+            case .success(let value):
+                let json = JSON(value)
+                let results = json["results"]
+                results.array?.forEach({(tralier) in
+                    let outTralier = Trailer(trailerName: tralier["name"].stringValue, key: tralier["key"].stringValue)
+                    traliersArr.append(outTralier)
+                })
+                self.detailsPresenter!.setTrailerArray(trailersOfMovie: traliersArr)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
     func saveJSON(jsonData : JSON) -> Array<HomeMovie> {
         let results = jsonData["results"]
         var moviesArr = Array<HomeMovie> ()
-        
-        
         results.array?.forEach({ (newMovie) in
-            
-            
-            
-            let movie = HomeMovie(movieID: newMovie["id"].intValue ,original_title: newMovie["original_title"].stringValue , poster_path: newMovie["poster_path"].stringValue , overview: newMovie["overview"].stringValue, release_date: newMovie["release_date"].stringValue , vote_Average: newMovie["vote_average"].floatValue)
-                
+            let movie = HomeMovie(id: newMovie["id"].int32Value,original_title: newMovie["original_title"].stringValue , poster_path: newMovie["poster_path"].stringValue , overview: newMovie["overview"].stringValue, release_date: newMovie["release_date"].stringValue , vote_Average: newMovie["vote_average"].floatValue)
             moviesArr.append(movie)
-            
-            self.fetchTrailerVideos(movieID: newMovie["id"].intValue){ result in
-                switch result{
-                case .success(let trailerArr):
-                        movie.setTrailers(trailers: trailerArr)
-                case .failure(let error):
-                        print("error")
-                }
-                }
-            
-            
         })
-        
         return moviesArr
     }
     
-   
+    
     
 }

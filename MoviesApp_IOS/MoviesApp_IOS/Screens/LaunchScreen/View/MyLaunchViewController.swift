@@ -9,7 +9,7 @@
 import UIKit
 
 class MyLaunchViewController: UIViewController {
-
+    
     //1. Declare ivars
     var appNameLable : UILabel!
     var iconImageView : UIImageView!
@@ -43,11 +43,11 @@ class MyLaunchViewController: UIViewController {
         }, completion: nil)
         
     }
-
+    
     override func viewDidAppear(_ animated: Bool) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 5.0, execute: {
             
-          let sdTab = self.storyboard?.instantiateViewController(withIdentifier: "tabVC") as! UITabBarController
+            let sdTab = self.storyboard?.instantiateViewController(withIdentifier: "tabVC") as! UITabBarController
             self.present(sdTab, animated: true, completion: nil)
         })
     }
@@ -56,15 +56,15 @@ class MyLaunchViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }

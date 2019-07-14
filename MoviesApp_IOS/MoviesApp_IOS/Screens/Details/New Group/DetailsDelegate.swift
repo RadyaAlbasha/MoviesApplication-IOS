@@ -10,4 +10,6 @@ import Foundation
 
 protocol DetailsDelegate {
     func setMovieToDisplayDetails(movie : HomeMovie);
+    func setTrailersForTable(trailerArr: [Trailer])
+    func setReviewsForTable(reviewArr: [Review])
 }

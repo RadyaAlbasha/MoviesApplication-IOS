@@ -7,14 +7,9 @@
         <attribute name="poster_path" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="release_date" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="vote_Average" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="movieTrailer" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TrailerEntity" syncable="YES"/>
-    </entity>
-    <entity name="TrailerEntity" representedClassName="TrailerEntity" syncable="YES" codeGenerationType="class">
-        <attribute name="key" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="movieTrailer" optional="YES" toMany="YES" deletionRule="Nullify" syncable="YES"/>
     </entity>
     <elements>
         <element name="Movie" positionX="-63" positionY="-18" width="128" height="150"/>
-        <element name="TrailerEntity" positionX="-54" positionY="45" width="128" height="75"/>
     </elements>
 </model>

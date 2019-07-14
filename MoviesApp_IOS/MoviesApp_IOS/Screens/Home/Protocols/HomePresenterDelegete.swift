@@ -11,5 +11,6 @@ import SwiftyJSON
 protocol HomePresenterDelegate {
     func setJSON(json : JSON)
     func setMoviesArr(moviesArr : Array<HomeMovie>)
+    func showAlert()
     //func getSegmentIndex() -> Int
 }
