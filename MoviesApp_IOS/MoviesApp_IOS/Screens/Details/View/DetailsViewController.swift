@@ -46,7 +46,6 @@ class DetailsViewController: UIViewController , UITableViewDataSource , UITableV
         self.reviewTableView.dataSource = self
         trailersArr = Array<Trailer>()
         reviewsArr = Array<Review>()
-        trailerTableView.sizeToFit()
        
         if #available(iOS 13.0, *) {
            

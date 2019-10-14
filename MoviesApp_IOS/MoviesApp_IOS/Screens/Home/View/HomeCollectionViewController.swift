@@ -19,6 +19,10 @@ class HomeCollectionViewController: UICollectionViewController ,UICollectionView
     var imageLink : String = "http://image.tmdb.org/t/p/w185/"
     override func viewDidLoad() {
         super.viewDidLoad()
+        //change segment selected TextColor
+        scSegment.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0.9137254902, green: 0.1450980392, blue: 0.1294117647, alpha: 1)], for: UIControl.State.selected)
+        
+        
         self.homePresenter.setDelegate(delegate: self)
         self.homePresenter.loadDatafromJson(index: 0)
         moviesArr = Array<HomeMovie>()
