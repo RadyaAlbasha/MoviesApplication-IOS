@@ -46,17 +46,16 @@ class DetailsViewController: UIViewController , UITableViewDataSource , UITableV
         self.reviewTableView.dataSource = self
         trailersArr = Array<Trailer>()
         reviewsArr = Array<Review>()
-       
-        if #available(iOS 13.0, *) {
            
-            trailerTableView.backgroundView  = showNetworkIndicator()
-            trailerNetworkIndicator = trailerTableView.backgroundView as? UIActivityIndicatorView
+            let tIndicator  = showNetworkIndicator()
+            trailerTableView.backgroundView = tIndicator
+            trailerNetworkIndicator = tIndicator
             trailerTableView.separatorStyle = UITableViewCellSeparatorStyle.none
             
-            reviewTableView.backgroundView  = showNetworkIndicator()
-            reviewNetworkIndicator = reviewTableView.backgroundView as? UIActivityIndicatorView
+            let rIndicator  = showNetworkIndicator()
+            reviewTableView.backgroundView =   rIndicator
+            reviewNetworkIndicator = rIndicator
             reviewTableView.separatorStyle = UITableViewCellSeparatorStyle.none
-        }
       
         detailsPresenterDelegate = DetailsPresenter(detailsViewDelegate: self)
         detailsPresenterDelegate?.getTrailerOfMovies(movieId: (movie?.id)!)
@@ -77,7 +76,7 @@ class DetailsViewController: UIViewController , UITableViewDataSource , UITableV
         voteAverage.text="\((movie?.vote_Average)!) "
         overviewLabel.text = movie?.overview
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -104,11 +103,26 @@ class DetailsViewController: UIViewController , UITableViewDataSource , UITableV
     
     func setTrailersForTable(trailerArr: [Trailer]) {
         self.trailersArr = trailerArr
+        let count = (trailersArr?.count)!
+                            if(count == 0){
+                                if trailerNetworkIndicator != nil{
+                                    trailerNetworkIndicator.stopAnimating()
+                                }
+                                trailerTableView.backgroundView  = notFoundLabel(msg: "There is no trailers")
+                            }
         self.trailerTableView.reloadData()
     }
     
     func setReviewsForTable(reviewArr: [Review]) {
         self.reviewsArr = reviewArr
+        let rcount = (reviewsArr?.count)!
+               if(rcount == 0){
+                   if reviewNetworkIndicator != nil{
+                       reviewNetworkIndicator.stopAnimating()
+                   }
+                   
+                   reviewTableView.backgroundView  = notFoundLabel(msg: "There is no reviews")
+               }
         self.reviewTableView.reloadData()
     }
     
@@ -118,25 +132,11 @@ class DetailsViewController: UIViewController , UITableViewDataSource , UITableV
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if(tableView == reviewTableView){
-            let count = (reviewsArr?.count)!
-            if(count == 0){
-                if reviewNetworkIndicator != nil{
-                    reviewNetworkIndicator.stopAnimating()
-                }
-                
-                reviewTableView.backgroundView  = notFoundLabel(msg: "There is no reviews")
-            }
-            return count
+            return (reviewsArr?.count)!
         }
         else{
-            let count = (trailersArr?.count)!
-                      if(count == 0){
-                          if trailerNetworkIndicator != nil{
-                              trailerNetworkIndicator.stopAnimating()
-                          }
-                        trailerTableView.backgroundView  = notFoundLabel(msg: "There is no trailers")
-                      }
-            return count
+          
+            return (trailersArr?.count)!
         }
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -172,7 +172,6 @@ class DetailsViewController: UIViewController , UITableViewDataSource , UITableV
             if reviewNetworkIndicator != nil{
                 reviewNetworkIndicator.stopAnimating()
             }
-            
         }
         
         return cell
@@ -187,14 +186,12 @@ class DetailsViewController: UIViewController , UITableViewDataSource , UITableV
         }
     }
     
-    @available(iOS 13.0, *)
     func showNetworkIndicator() -> UIActivityIndicatorView
     {
-        let networkIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorView.Style.large)
+        let networkIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorView.Style.whiteLarge)
         networkIndicator.color = #colorLiteral(red: 0.9137254902, green: 0.1450980392, blue: 0.1294117647, alpha: 1)
         networkIndicator.center = view.center
         networkIndicator.startAnimating()
-        //view.addSubview(networkIndicator)
         return networkIndicator
     }
     
