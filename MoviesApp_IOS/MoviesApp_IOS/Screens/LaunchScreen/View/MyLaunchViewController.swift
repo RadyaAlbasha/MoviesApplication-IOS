@@ -48,8 +48,13 @@ class MyLaunchViewController: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 5.0, execute: {
             
             let sdTab = self.storyboard?.instantiateViewController(withIdentifier: "tabVC") as! UITabBarController
+            sdTab.modalPresentationStyle = .overFullScreen
             self.present(sdTab, animated: true, completion: nil)
+
         })
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+  
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

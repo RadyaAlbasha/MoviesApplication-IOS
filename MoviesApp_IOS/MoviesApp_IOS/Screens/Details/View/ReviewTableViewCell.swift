@@ -17,6 +17,7 @@ class ReviewTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        reviewAuthorLabel.sizeToFit()
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
